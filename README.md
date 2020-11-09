@@ -9,7 +9,13 @@ The ideea of this project was to create a Real World Time Dependent Vehicle Rout
   - The client is an Angular application.
 
 ## Features of the Wrapper Application:
-* feature 1
+* Login, logout, register;
+* Edit profile;
+* Add/Delete/Update/List/Filter/Sort/See details (of) driver(s);
+* Create a custom RWTDVRP instance;
+* Stop the solver for a custom RWTDVRP instance;
+* See the details & solution of an already solved custom RWTDVRP instance;
+* List/Filter/Sort RWTDVRP instances.
 
 ## How to start the project:
 **Backend of the API:**

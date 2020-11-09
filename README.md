@@ -2,7 +2,11 @@
 **This is the accompanying project of my Bachelor Thesis from UBB, 2020.**
 
 ## Project overview
-
+The ideea of this project was to create a Real World Time Dependent Vehicle Routing Problem solver using a Self Adaptive genetic algorithm and uses the power of the Google Directions API to make real world predictions of the travel costs of given routes, based on the departure time. The solution is actually split into 2 applications:
+* An API written in Java (using Spring Boot) that receives a RWTDVRP instance in JSON format and solves it. It makes use of the Google Directions API and a custom thread safe cache, since the execution of the API is parallelized in order to support multiple solvers running concurently. The solution can be retrieved on demand, and that's the point when the solver stops and retrieves the best solution found until the stopping time. If the solution is not requested and the solver does not improve over a predefined number of iterations, the solver will stop and will store the best solution found, untill it will be requested.
+* A Wrapper Application with a client-server architecture that allows each user to create custom RWTDVRP instances and submit them to be solved by the before mentioned API.
+  - The server is written in Java, using Spring Boot and Spring Security, and uses a MySQL DB for storing users, VRP instances and solutions among other important objects;
+  - The client is an Angular application.
 
 ## Features of the Wrapper Application:
 * feature 1

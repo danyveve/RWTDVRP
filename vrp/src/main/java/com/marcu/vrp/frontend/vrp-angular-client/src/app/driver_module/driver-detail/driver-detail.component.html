@@ -1,0 +1,53 @@
+<section fxLayout="row" fxFill fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%" *ngIf="driver">
+    <mat-card-title>Edit Driver</mat-card-title>
+    <form [formGroup]="editDriverForm"
+          autocomplete="off" novalidate
+          (ngSubmit)="doEditDriver(editDriverForm.value)"
+          fxLayout="column"
+          fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content class="w-100" fxLayout="column">
+        <mat-form-field class="m-2" color="accent">
+          <input [(ngModel)]="driver.firstName" matInput type="text" placeholder="First name" formControlName="firstName" id="firstName">
+          <mat-error *ngIf="hasError('firstName', 'required')">First name is required!</mat-error>
+          <mat-error *ngIf="hasError('firstName', 'maxlength')">First name has more than 256 characters!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="m-2" color="accent">
+          <input [(ngModel)]="driver.lastName" matInput type="text" placeholder="Last name" formControlName="lastName" id="lastName">
+          <mat-error *ngIf="hasError('lastName', 'required')">Last name is required!</mat-error>
+          <mat-error *ngIf="hasError('lastName', 'maxlength')">Last name has more than 256 characters!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="m-2" color="accent">
+          <input [(ngModel)]="driver.phone" matInput type="text" placeholder="Phone no." formControlName="phone" id="phone">
+          <mat-error *ngIf="hasError('phone', 'required')">Phone no. is required!</mat-error>
+          <mat-error *ngIf="hasError('phone', 'maxlength')">Phone no. has more than 256 characters!</mat-error>
+          <mat-error *ngIf="hasError('phone', 'pattern')">This does not seem to be a valid Phone no.!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="m-2" color="accent">
+          <input [(ngModel)]="driver.email" matInput type="text" placeholder="Email" formControlName="email" id="email">
+          <mat-error *ngIf="hasError('email', 'required')">Email is required!</mat-error>
+          <mat-error *ngIf="hasError('email', 'maxlength')">Email has more than 256 characters!</mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">This does not seem to be a valid e-mail address!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="m-2" color="accent">
+          <input [(ngModel)]="driver.car" matInput type="text" placeholder="Car" formControlName="car" id="car">
+          <mat-hint align="end">This will be your nickname in the VRP application!</mat-hint>
+          <mat-error *ngIf="hasError('car', 'required')">Car is required!</mat-error>
+          <mat-error *ngIf="hasError('car', 'maxlength')">Car has more than 256 characters!</mat-error>
+        </mat-form-field>
+
+        <mat-error *ngIf="editDriverFailedMessage">{{editDriverFailedMessage}}</mat-error>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="accent" [disabled]="!editDriverForm.valid">Edit Driver</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>
+

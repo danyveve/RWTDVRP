@@ -1,0 +1,86 @@
+<!-- app.component.html -->
+
+<div class="gmap-add-container d-flex flex-row">
+
+
+  <div class="agmap-search-container">
+    <div class="form-group">
+      <label>Select locations</label>
+      <input class="form-control agmap-search-input" (keydown.enter)="$event.preventDefault()"
+             placeholder="Search for a location" autocapitalize="off" type="text" #search>
+    </div>
+
+    <div class="form-group">
+      <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                    (dragEnd)="markerDragEnd($event)"></agm-marker>
+      </agm-map>
+    </div>
+
+    <div class="form-group">
+      <div class="d-flex flex-row address-holder-div">
+        <div class="address-details">
+          <div>Address: {{address}}</div>
+          <div>Latitude: {{latitude}}</div>
+          <div>Longitude: {{longitude}}</div>
+        </div>
+        <div class="address-buttons d-flex flex-column">
+          <button mat-raised-button color="accent" class="mb-2" (click)="markAsDepot()">Mark as depot</button>
+          <button mat-raised-button color="secondary" class="mt-auto" (click)="addDeliveryPoint()">Add delivery point</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="vrp-config-container">
+    <div class="form-group">
+      <label>Preferred departure time</label>
+      <input class="form-control preferred-departure-time" placeholder="Preferred departure time" type="datetime-local"
+             id="preferredTimePick"
+             [ngModel]="preferredTime"
+             (ngModelChange)="preferredTime = $event + ':00.000'">
+    </div>
+
+    <div class="form-group flex-grow-1 drivers-list">
+      <div>Select Drivers:</div>
+      <ul class="driver-ul">
+        <li *ngFor="let driver of drivers">
+          <mat-checkbox (change)="driverChange($event.checked, driver)">{{driver.firstName}} {{driver.lastName}}, {{driver.phone}}, {{driver.car}}</mat-checkbox>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <div class="points-list">
+        <div>Depot:</div>
+        <ul>
+          <li *ngIf="depot">
+            <div class="d-flex flex-row">
+              <span>{{depot.address}}({{depot.latitude}}, {{depot.longitude}})</span>
+              <button class="ml-auto" mat-mini-fab color="secondary" (click)="deleteDepot()">
+                <mat-icon class="mt-auto mb-auto" color="accent">delete</mat-icon>
+              </button>
+            </div>
+          </li>
+        </ul>
+        <div>Delivery Points:</div>
+        <ul>
+          <li *ngFor="let deliveryPoint of deliveryPoints" class="mt-1 mb-1">
+            <div class="d-flex flex-row">
+              <span>{{deliveryPoint.address}} ({{deliveryPoint.latitude}}, {{deliveryPoint.longitude}})</span>
+              <button class="ml-auto" mat-mini-fab color="secondary" (click)="deleteDeliveryPoint(deliveryPoint)">
+                <mat-icon class="mt-auto mb-auto" color="accent">delete</mat-icon>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="w-100 d-flex">
+  <button mat-raised-button class="mr-auto" color="warn" (click)="cancelVrpStart()">Cancel</button>
+  <button [disabled]="startClicked" mat-raised-button class="ml-auto" color="accent" (click)="startSolvingVrp()">Start solver!</button>
+</div>

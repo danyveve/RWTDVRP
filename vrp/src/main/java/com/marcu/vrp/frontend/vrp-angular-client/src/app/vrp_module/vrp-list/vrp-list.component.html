@@ -1,0 +1,113 @@
+<div class="transp-middle-container">
+  <div class="my-container">
+    <h1 class="ml-auto mr-auto">This is your TDVRP list</h1>
+
+    <div class="vrp-list-sortable"
+         style="padding-bottom: 0; padding-top: 0; margin-top: 0; margin-bottom: 0; overflow: unset">
+      <div class="form-group d-flex m-0">
+        <label>Search VRPs:</label>
+        <input class="form-control search-form" placeholder="Search by addresses or driver details..." type="text"
+               #searchBox id="search-box" (input)="searchVrp(searchBox.value)">
+      </div>
+      <div class="vrp-list-row-header" style="margin-bottom: 0; margin-top: 0">
+        <span class="position-absolute" style="margin-bottom: 0; margin-top: 0">Sort by:</span>
+        <div class="created-on" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="createdOn">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'createdOn' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="createdOn">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'createdOn' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="depot" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="depot">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'depot' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="depot">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'depot' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="no-dp" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="deliveryPoints">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'deliveryPoints' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="deliveryPoints">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'deliveryPoints' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="no-dr" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="drivers">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'drivers' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="drivers">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'drivers' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="preferred-dt" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="preferredDeparture">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'preferredDeparture' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="preferredDeparture">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'preferredDeparture' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="suggested-dt" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="suggestedDeparture">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'suggestedDeparture' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="suggestedDeparture">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'suggestedDeparture' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="total" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="totalTime">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'totalTime' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="totalTime">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'totalTime' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div></div>
+      </div>
+
+      <div class="vrp-list-row-header">
+        <div class="created-on"><span>Created On</span></div>
+        <div class="depot"><span>Depot</span></div>
+        <div class="no-dp"><span>Delivery Points</span></div>
+        <div class="no-dr"><span>Drivers</span></div>
+        <div class="preferred-dt"><span>Preferred Departure</span></div>
+        <div class="suggested-dt"><span>Suggested Departure</span></div>
+        <div class="total"><span>Total Time</span></div>
+        <div></div>
+      </div>
+
+      <div class="vrp-list-row" style="border: 2px solid #424242; border-radius: 25px"></div>
+    </div>
+
+    <div class="vrp-list">
+      <div *ngFor="let vrpInstance of vrps$ | async" class="vrp-list-row"
+           (click)="router.navigateByUrl('/vrp/detail/' + vrpInstance.id)">
+        <div class="created-on"><span>{{vrpInstance.createdOn | date:'medium'}}</span></div>
+        <div class="depot"><span>{{vrpInstance.depot.address}} ({{vrpInstance.depot.latitude}}, {{vrpInstance.depot.longitude}})</span>
+        </div>
+        <div class="no-dp"><span>{{vrpInstance.deliveryPoints.length}}</span></div>
+        <div class="no-dr"><span>{{vrpInstance.routes.length}}</span></div>
+        <div class="preferred-dt"><span>{{vrpInstance.preferredDepartureTime | date:'medium'}}</span></div>
+        <div *ngIf="vrpInstance.suggestedDepartureTime" class="suggested-dt"><span>{{vrpInstance.suggestedDepartureTime | date:'medium'}}</span>
+        </div>
+        <div *ngIf="!vrpInstance.suggestedDepartureTime" class="suggested-dt">
+          <mat-spinner [diameter]="25" color="accent"></mat-spinner>
+        </div>
+        <div *ngIf="vrpInstance.totalCost" class="total"><span>{{secondsToString(vrpInstance.totalCost)}}</span></div>
+        <div *ngIf="!vrpInstance.totalCost" class="total">
+          <mat-spinner [diameter]="25" color="accent"></mat-spinner>
+        </div>
+        <div></div>
+      </div>
+    </div>
+
+    <button class="ml-auto mt-3" mat-raised-button color="accent" (click)="router.navigateByUrl('/vrp/add')">Create a
+      new TDVRP instance
+    </button>
+  </div>
+</div>

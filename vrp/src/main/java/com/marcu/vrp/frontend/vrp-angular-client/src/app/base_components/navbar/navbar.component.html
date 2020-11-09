@@ -1,0 +1,26 @@
+<mat-toolbar class="my-navbar">
+  <mat-toolbar-row>
+    <span class="navbar-item" (click)="router.navigateByUrl('/home')">Home</span>
+    <div class="separator" *showIfLoggedIn="true"></div>
+    <span class="navbar-item" (click)="router.navigateByUrl('/vrp')" *showIfLoggedIn="true">TDVRP instances</span>
+    <div class="separator" *showIfAdmin="true"></div>
+    <span class="navbar-item" (click)="router.navigateByUrl('/drivers')" *showIfAdmin="true">Drivers</span>
+    <div class="right-side-navbar">
+      <button *showIfLoggedIn="false" class="navbar-item" mat-raised-button color="accent"
+              (click)="router.navigateByUrl('/login')">Login
+      </button>
+      <button *showIfLoggedIn="false" class="navbar-item" mat-raised-button color="accent"
+              (click)="router.navigateByUrl('/register')">Register
+      </button>
+      <span *showIfLoggedIn="true">
+      <mat-icon [matMenuTriggerFor]="menu" aria-hidden="false" class="navbar-item"
+                aria-label="Use menu">account_circle</mat-icon>
+        <mat-menu #menu>
+        <div (click)="router.navigateByUrl('/edit-profile')" mat-menu-item>Edit profile</div>
+        <div (click)="logout()" mat-menu-item>Logout</div>
+      </mat-menu>
+      </span>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+

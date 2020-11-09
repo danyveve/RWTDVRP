@@ -1,0 +1,24 @@
+.welcome-message {
+  opacity: 1;
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-message > * {
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+}
+
+.transp-middle-container {
+  display: flex;
+  margin: 30px;
+  height: 90%;
+  border-radius: 25px;
+  border: 2px solid #424242;
+  background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4));
+  overflow-y: auto;
+}

@@ -1,0 +1,93 @@
+agm-map {
+  height: 300px;
+  width: 500px;
+}
+
+.agmap-search-container {
+  width: 500px;
+
+  .agmap-search-input, .address-holder-div {
+    border-radius: 25px;
+    border: 2px solid #424242;
+  }
+
+  .address-holder-div {
+    margin-top: 15px;
+    padding: 10px;
+    height: 110px;
+  }
+}
+
+.address-buttons {
+  margin-top: 5px;
+  width: 150px;
+}
+
+.address-details {
+  margin-top: 5px;
+  width: 350px;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: rgba(105, 240, 174, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(105, 240, 174, 0.6);
+  outline: 0 none;
+}
+
+
+.vrp-config-container {
+  width: 500px;
+  margin-left: 15px;
+
+  .preferred-departure-time, .drivers-list, .points-list {
+    border-radius: 25px;
+    border: 2px solid #424242;
+  }
+
+  .drivers-list {
+    padding: 10px;
+    height: 110px;
+    overflow: scroll;
+  }
+
+  .points-list {
+    padding: 10px;
+    height: 300px;
+    overflow: scroll;
+  }
+
+  .driver-ul {
+    list-style-type: none;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .drivers-list::-webkit-scrollbar, .points-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE and Edge */
+  .drivers-list, .points-list {
+    -ms-overflow-style: none;
+  }
+}
+
+
+::ng-deep .mat-checkbox-frame {
+  border-color: #424242;
+}
+

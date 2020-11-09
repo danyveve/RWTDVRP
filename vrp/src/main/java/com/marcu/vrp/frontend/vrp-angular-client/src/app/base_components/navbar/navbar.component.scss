@@ -1,0 +1,29 @@
+.navbar-item {
+  cursor: pointer;
+  margin: auto 5px;
+}
+
+.separator {
+  height: 25px;
+  margin: auto 5px;
+  width: 1px;
+  background-color: white !important;
+  display: inline-block;
+}
+
+.my-navbar {
+  background-color: #424242;
+}
+
+.navbar-item:hover {
+  opacity: 0.9;
+}
+
+.right-side-navbar {
+  display: flex;
+  margin-left: auto;
+}
+
+.left-side-navbar {
+  margin-right: auto;
+}

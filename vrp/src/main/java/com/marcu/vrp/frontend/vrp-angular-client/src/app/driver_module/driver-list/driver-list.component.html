@@ -1,0 +1,85 @@
+<div class="transp-middle-container">
+  <div class="my-container">
+    <h1 class="ml-auto mr-auto">Drivers list</h1>
+
+    <div class="driver-list-sortable"
+         style="padding-bottom: 0; padding-top: 0; margin-top: 0; margin-bottom: 0; overflow: unset">
+      <div class="form-group d-flex m-0">
+        <label>Search Drivers:</label>
+        <input class="form-control search-form" placeholder="Search by name, phone, e-mail or car..." type="text"
+               #searchBox id="search-box" (input)="searchDriver(searchBox.value)">
+      </div>
+      <div class="driver-list-row-header" style="margin-bottom: 0; margin-top: 0">
+        <span class="position-absolute" style="margin-bottom: 0; margin-top: 0">Sort by:</span>
+        <div class="firstName" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="firstName">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'firstName' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="firstName">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'firstName' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="lastName" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="lastName">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'lastName' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="lastName">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'lastName' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="phone" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="phone">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'phone' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="phone">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'phone' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="email" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="email">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'email' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="email">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'email' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="car" style="margin-bottom: 0; margin-top: 0">
+          <mat-radio-button (change)="radioChanged($event.value, true)" value="car">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'car' && ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_up</mat-icon>
+          </mat-radio-button>
+          <mat-radio-button (change)="radioChanged($event.value, false)" value="car">
+            <mat-icon [ngStyle]="{'color': sortedColumn === 'car' && !ascendant ? '#69f0ae' : 'unset' }">keyboard_arrow_down</mat-icon>
+          </mat-radio-button>
+        </div>
+        <div class="delete"></div>
+      </div>
+
+      <div class="driver-list-row-header">
+        <div class="firstName"><span>First Name</span></div>
+        <div class="lastName"><span>Last Name</span></div>
+        <div class="phone"><span>Phone</span></div>
+        <div class="email"><span>Email</span></div>
+        <div class="car"><span>Car</span></div>
+        <div class="delete"></div>
+      </div>
+
+      <div class="driver-list-row" style="border: 2px solid #424242; border-radius: 25px"></div>
+    </div>
+
+    <div class="driver-list">
+      <div *ngFor="let driver of drivers$ | async" class="driver-list-row"
+           (click)="router.navigateByUrl('/driver/detail/' + driver.id)">
+        <div class="firstName"><span>{{driver.firstName}}</span></div>
+        <div class="lastName"><span>{{driver.lastName}}</span></div>
+        <div class="phone"><span>{{driver.phone}}</span></div>
+        <div class="email"><span>{{driver.email}}</span></div>
+        <div class="car"><span>{{driver.car}}</span></div>
+        <div class="delete"><button mat-mini-fab color="warn" (click)="deleteDriver(driver, $event)"><mat-icon>delete</mat-icon></button></div>
+      </div>
+    </div>
+
+    <button class="ml-auto mt-3" mat-raised-button color="accent" (click)="router.navigateByUrl('/driver/add')">
+      Add a new Driver
+    </button>
+  </div>
+</div>

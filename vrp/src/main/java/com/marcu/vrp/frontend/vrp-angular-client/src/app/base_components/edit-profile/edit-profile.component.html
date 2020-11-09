@@ -1,0 +1,61 @@
+<section fxLayout="row" fxFill fxLayoutAlign="center center" *ngIf="currentUser">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Edit profile</mat-card-title>
+    <form [formGroup]="editProfileForm"
+          autocomplete="off" novalidate
+          (ngSubmit)="doEditProfile(editProfileForm.value)"
+          fxLayout="column"
+          fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content class="w-100" fxLayout="column">
+        <mat-form-field class="m-2" color="accent">
+          <input [(ngModel)]="currentUser.email" matInput type="text" placeholder="Email" formControlName="email" id="email">
+          <mat-error *ngIf="hasError('email', 'required')">Email is required!</mat-error>
+          <mat-error *ngIf="hasError('email', 'maxlength')">Email has more than 256 characters!</mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">This does not seem to be a valid e-mail address!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="m-2" color="accent">
+          <input matInput type="password" placeholder="Password" formControlName="password" minlength="0">
+          <mat-hint align="end">Do not share your credentials with untrusted persons!</mat-hint>
+          <!--<mat-error *ngIf="hasError('password', 'required')">Password is required!</mat-error>-->
+          <mat-error *ngIf="hasError('password', 'maxlength')">Password has more than 256 characters!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="m-2" color="accent">
+          <input matInput type="password" placeholder="Password confirmation" formControlName="passwordConfirmation">
+          <mat-hint align="end">Re-type your password to confirm it!</mat-hint>
+          <!--<mat-error *ngIf="hasError('passwordConfirmation', 'required')">Password confirmation is required!</mat-error>-->
+          <mat-error *ngIf="hasError('passwordConfirmation', 'maxlength')">Password confirmation has more than 256 characters!</mat-error>
+          <mat-error *ngIf="hasError('passwordConfirmation', 'mustMatch')">Password and password confirmation do not match!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="m-2" color="accent">
+          <input [(ngModel)]="currentUser.phone" matInput type="text" placeholder="Phone no." formControlName="phone" id="phone">
+          <mat-error *ngIf="hasError('phone', 'required')">Phone no. is required!</mat-error>
+          <mat-error *ngIf="hasError('phone', 'maxlength')">Phone no. has more than 256 characters!</mat-error>
+          <mat-error *ngIf="hasError('phone', 'pattern')">This does not seem to be a valid Phone no.!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="m-2" color="accent">
+          <input [(ngModel)]="currentUser.firstName" matInput type="text" placeholder="First name" formControlName="firstName" id="firstName">
+          <mat-error *ngIf="hasError('firstName', 'required')">First name is required!</mat-error>
+          <mat-error *ngIf="hasError('firstName', 'maxlength')">First name has more than 256 characters!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="m-2" color="accent">
+          <input [(ngModel)]="currentUser.lastName" matInput type="text" placeholder="Last name" formControlName="lastName" id="lastName">
+          <mat-error *ngIf="hasError('lastName', 'required')">Last name is required!</mat-error>
+          <mat-error *ngIf="hasError('lastName', 'maxlength')">Last name has more than 256 characters!</mat-error>
+        </mat-form-field>
+
+        <mat-error *ngIf="editProfileFailedMessage">{{editProfileFailedMessage}}</mat-error>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="accent" [disabled]="!editProfileForm.valid">Edit Profile</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>
+

@@ -1,0 +1,92 @@
+/* Hide scrollbar for Chrome, Safari and Opera */
+.driver-list::-webkit-scrollbar, .points-list::-webkit-scrollbar, .transp-middle-container::-webkit-scrollbar, .driver-list-sortable::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.driver-list, .points-list, .transp-middle-container, .driver-list-sortable {
+  -ms-overflow-style: none;
+}
+
+.my-container {
+  opacity: 1;
+  height: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  .driver-list, .driver-list-sortable {
+    width: 1200px;
+    padding: 5px 25px;
+    overflow: scroll;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    .driver-list-row, .driver-list-row-header {
+      width: 100%;
+      border-radius: 25px;
+      display: flex;
+      flex-direction: row;
+      margin-top: 5px;
+      margin-bottom: 5px;
+
+      .firstName, .lastName, .phone, .email, .car, .delete {
+        flex: 1;
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        > * {
+          //margin-left: auto;
+          //margin-right: auto;
+          text-align: center;
+          line-height: normal;
+          word-break: break-word;
+        }
+      }
+    }
+
+    .driver-list-row:hover {
+      background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4));
+      cursor: pointer;
+    }
+  }
+}
+
+.my-container > * {
+  font-weight: bold;
+}
+
+.transp-middle-container {
+  display: flex;
+  margin: 30px;
+  height: 90%;
+  border-radius: 25px;
+  border: 2px solid #424242;
+  background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4));
+  overflow-y: auto;
+}
+
+::ng-deep .mat-radio-label {
+  margin-bottom: unset;
+}
+
+.sort-fields > * {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.search-form {
+  border-radius: 25px;
+  border: 2px solid #424242;
+}
+
+::ng-deep .mat-radio-container {
+  display: none !important;
+}
+
+::ng-deep .mat-radio-label-content {
+  padding: 0 !important;
+}
+

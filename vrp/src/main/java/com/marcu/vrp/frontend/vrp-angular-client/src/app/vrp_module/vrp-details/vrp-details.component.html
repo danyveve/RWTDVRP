@@ -1,0 +1,67 @@
+<div class="transp-middle-container">
+  <div class="my-container">
+    <h1 class="ml-auto mr-auto">TDVRP Details</h1>
+    <div class="vrp-details-container" *ngIf="vrpInstance">
+      <div class="w-100 d-flex">
+        <div class="vrp-details-summary">
+          <div>Summary</div>
+          <ul>
+            <li>Created on: <span>{{vrpInstance.createdOn | date:'medium'}}</span></li>
+            <li>Depot: <span>{{vrpInstance.depot.address}} ({{vrpInstance.depot.latitude}}, {{vrpInstance.depot.longitude}})</span></li>
+            <li>Delivery Points: <span>{{vrpInstance.deliveryPoints.length}}</span></li>
+            <li>Drivers: <span>{{vrpInstance.routes.length}}</span></li>
+            <li>Preferred Departure: <span>{{vrpInstance.preferredDepartureTime | date:'medium'}}</span></li>
+            <li ><span>Suggested Departure:</span>
+              <div class="ml-3" *ngIf="!vrpInstance.suggestedDepartureTime"><mat-spinner [diameter]="25" color="accent"></mat-spinner></div>
+              <div class="ml-3" *ngIf="vrpInstance.suggestedDepartureTime" style="color: #69f0ae">{{vrpInstance.suggestedDepartureTime | date:'medium'}}</div>
+            </li>
+            <li>
+              <span>Total Time:</span>
+              <div class="ml-3" *ngIf="!vrpInstance.totalCost"><mat-spinner [diameter]="25" color="accent"></mat-spinner></div>
+              <div class="ml-3" style="color: #69f0ae" *ngIf="vrpInstance.totalCost">{{secondsToString(vrpInstance.totalCost)}}</div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="vrp-details-points">
+            <div>Delivery Points</div>
+            <ul>
+              <li *ngFor="let dp of vrpInstance.deliveryPoints">
+                <span>{{dp.geographicPoint.address}} ({{dp.geographicPoint.latitude}}, {{dp.geographicPoint.longitude}})</span>
+              </li>
+            </ul>
+          </div>
+          <div class="vrp-details-drivers">
+            <div>Drivers & Routes</div>
+            <ul>
+              <li *ngFor="let route of vrpInstance.routes">
+                <div>{{route.driver.firstName}} {{route.driver.lastName}}, {{route.driver.phone}}, {{route.driver.car}}</div>
+                <ul>
+                  <li>
+                    <div>Route Time:</div>
+                    <div class="ml-3" *ngIf="!route.cost"><mat-spinner [diameter]="25" color="accent"></mat-spinner></div>
+                    <div style="color: #69f0ae;" class="ml-3" *ngIf="route.cost">{{secondsToString(route.cost)}}</div>
+                  </li>
+                  <li>
+                    <div >Route Details:</div>
+                    <div class="ml-3" *ngIf="!route.geographicPointToRouteAssignments || route.geographicPointToRouteAssignments.length === 0"><mat-spinner [diameter]="25" color="accent"></mat-spinner></div>
+                    <div class="ml-3" *ngIf="route.geographicPointToRouteAssignments && route.geographicPointToRouteAssignments.length !== 0">
+                      {{vrpInstance.depot.address}} ->
+                      <span *ngFor="let dp of route.geographicPointToRouteAssignments">{{dp.geographicPoint.address}} -> </span>
+                      {{vrpInstance.depot.address}}
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex w-100">
+        <button mat-raised-button class="mr-auto mt-3" color="warn" (click)="goBack()">Go Back</button>
+        <button *ngIf="!vrpInstance.totalCost" class="ml-auto mt-3" mat-raised-button color="accent" (click)="stopVrpInstance(vrpInstance.id)">Stop solver and get result</button>
+        <span *showIfAdmin="true"><button *ngIf="vrpInstance.totalCost" mat-raised-button color="warn" class="ml-auto mt-3" (click)="deleteVrp(vrpInstance.id)">Delete</button></span>
+      </div>
+    </div>
+  </div>
+</div>

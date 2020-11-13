@@ -1,5 +1,4 @@
-# RWTDVRP-Bachelor-Project
-**This is the accompanying project of my Bachelor Thesis from UBB, 2020.**
+# RWTDVRP
 
 ## Project overview
 The ideea of this project was to create a Real World Time Dependent Vehicle Routing Problem solver using a Self Adaptive genetic algorithm and uses the power of the Google Directions API to make real world predictions of the travel costs of given routes, based on the departure time. The solution is actually split into 2 applications:
